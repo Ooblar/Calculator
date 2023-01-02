@@ -3,6 +3,7 @@
     margin: 0 ;
     padding: 0;
     color: #FAFAFA;
+    box-sizing: border-box;
 }
 .color{
 color: #1D242B;
@@ -16,7 +17,7 @@ body
     flex-direction: column;
     background-color: #1D242B;
     height: 100vh;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 button
@@ -33,6 +34,9 @@ button:hover
 {
     background-color: #FAFAFA;
     color: #1D242B;
+}
+header{
+
 }
 #mainbody
 {
@@ -57,8 +61,15 @@ button:hover
     height:20vh;
     margin-bottom:20px ;
     border-radius: 10px;
+    align-items: flex-end;
+    flex-direction: column;
+    padding: 20px;
 }
-
+#current
+{
+    font-size: 24px;
+    margin-top: 20px;
+}
 #numbers
 {
     display: grid;
@@ -92,7 +103,5 @@ button:hover
     background-color: #0077C0;
     display: flex;
     width: 100%;
-    justify-content: space-around;
-    
-
+    justify-content: center;
 }

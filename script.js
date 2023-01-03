@@ -1,3 +1,4 @@
+"use strict"
 // nodes
 //display
 const display = document.getElementById("display")
@@ -7,7 +8,7 @@ const current = document.getElementById("current")
 //numbers side
 const numbers = document.querySelectorAll("numbers")
 const _clear = document.getElementById("clear")
-const _percentage = document.getElementById("percentage")
+const _percentage = document.getElementById("percentage")//not implmnted yet
 const _backspace = document.getElementById("backspace")
 const _7 = document.getElementById("7")
 const _8 = document.getElementById("8")
@@ -31,117 +32,130 @@ const _equals = document.getElementById("equals")
 
 
 //values
-let currentvalue = "";
-let selectedopretor = "";
-//functions
-function add(a, b) {
-    return a + b;
+let current_value = "";
+let saved_value = "";
+let selected_operator = "";
+let opretor = "";
+/*
+1 -writing in current_value 
+if an opretor is pressed 
+chang into next value
+if(= is clicked){use opratefucntion on current_value and next_value;
+ next value is now current value}
+ifelse (oprator is clicked again oprate function on current-value and next_value)
+*/
+
+//------------functions
+//math
+function add(savedValue, currentValue) {
+    return (+savedValue) + (+currentValue);
 }
-function subtract(a, b) {
-    return a - b;
+function subtract(savedValue, currentValue) {
+    return savedValue - currentValue;
 }
-function multiply(a, b) {
-    return a * b;
+function multiply(savedValue, currentValue) {
+    return savedValue * currentValue;
 }
-function divide(a, b) {
-    return a / b;
+function divide(savedValue, currentValue) { //something is wrong with the division
+    return savedValue / currentValue;
 }
-function operate(opretor, a, b) {
+
+function operate(opretor, savedValue, currentValue) {
     if (opretor == "+") {
-        return add(a, b);
+        return add(savedValue, currentValue);
     }
     if (opretor == "-") {
-        return subtract(a, b);
+        return subtract(savedValue, currentValue);
     }
     if (opretor == "*") {
-        return multiply(a, b);
+        return multiply(savedValue, currentValue);
     }
     if (opretor == "/") {
-        return divide(a, b);
+        return divide(savedValue, currentValue);
     }
 }
-_clear.addEventListener("click", () => {
+
+_clear.addEventListener("click", () => {//clear button
     current.innerText = "";
-    currentvalue = "";
-    console.log(currentvalue)
+    current_value = "";
+    saved_value = "";
+    held.innerText = "";
+    opretor = "";
+    console.log(current_value)
 })
-_backspace.addEventListener("click", () => {
-    current.innerText = (currentvalue.slice(0,-1));
-    currentvalue = (currentvalue.slice(0,-1));
-    console.log(currentvalue)
+_backspace.addEventListener("click", () => {//backspace button
+    current.innerText = (current_value.slice(0, -1));
+    current_value = (current_value.slice(0, -1));
+    console.log(current_value)
 })
+
+function updateNum(num) {
+    current.innerText += num;
+    current_value += num;
+    console.log(current_value)
+}
 
 _9.addEventListener("click", () => {
-    current.innerText += "9";
-    currentvalue += "9";
-    console.log(currentvalue)
+    updateNum("9");
 })
 _8.addEventListener("click", () => {
-    current.innerText += "8";
-    currentvalue += "8";
-    console.log(currentvalue);
+    updateNum("8");
+
 })
 _7.addEventListener("click", () => {
-    current.innerText += "7";
-    currentvalue += "7";
-    console.log(currentvalue);
+    updateNum("7");
+
 })
 _6.addEventListener("click", () => {
-    current.innerText += "6";
-    currentvalue += "6";
-    console.log(currentvalue);
+    updateNum("6");
+
 })
 _5.addEventListener("click", () => {
-    current.innerText += "5";
-    currentvalue += "5";
-    console.log(currentvalue);
+    updateNum("5");
+
 })
 _4.addEventListener("click", () => {
-    current.innerText += "4";
-    currentvalue += "4";
-    console.log(currentvalue);
+    updateNum("4");
+
 })
 _3.addEventListener("click", () => {
-    current.innerText += "3";
-    currentvalue += "3";
-    console.log(currentvalue);
+    updateNum("3");
+
 })
 _2.addEventListener("click", () => {
-    current.innerText += "2";
-    currentvalue += "2";
-    console.log(currentvalue);
+    updateNum("2");
+
 })
 _1.addEventListener("click", () => {
-    current.innerText += "1";
-    currentvalue += "1";
-    console.log(currentvalue);
+    updateNum("1");
+
 })
 _0.addEventListener("click", () => {
-    current.innerText += "0";
-    currentvalue += "0";
-    console.log(currentvalue);
+    updateNum("0");
+
 })
 _00.addEventListener("click", () => {
-    current.innerText += "00";
-    currentvalue += "00";
-    console.log(currentvalue);
+    updateNum("00");
+
 })
 _dot.addEventListener("click", () => {
-    current.innerText += ".";
-    currentvalue += ".";
-    console.log(currentvalue);
+    updateNum(".");
 })
 
+function updateOpreator(oprator) {
+    opretor = oprator;
+    saved_value = current_value;
+    current_value = "";
+    current.innerText = ""
+    held.innerText = saved_value;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+_addition.addEventListener("click", () => { updateOpreator("+") })
+_subtraction.addEventListener("click", () => { updateOpreator("-") })
+_multiplication.addEventListener("click", () => { updateOpreator("*") })
+_division.addEventListener("click", () => { opretor = updateOpreator = ("/") })
+_equals.addEventListener("click", () => {
+    current_value = operate(opretor, saved_value, current_value)
+    current.innerText = current_value;
+    console.log(current.innerText)
+})

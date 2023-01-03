@@ -38,9 +38,9 @@ button:hover
     background-color: #FAFAFA;
     color: #1D242B;
 }
-header{
+/* header{
 
-}
+} */
 #mainbody
 {
     border:solid;
@@ -71,7 +71,6 @@ header{
 #current
 {
     font-size: 24px;
-    margin-top: 20px;
 }
 #numbers
 {

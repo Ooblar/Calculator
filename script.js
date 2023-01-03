@@ -1,10 +1,8 @@
-"use strict"
 // nodes
 //display
 const display = document.getElementById("display")
 const held = document.getElementById("held")
 const current = document.getElementById("current")
-
 //numbers side
 const numbers = document.querySelectorAll("numbers")
 const _clear = document.getElementById("clear")
@@ -34,7 +32,6 @@ const _equals = document.getElementById("equals")
 //values
 let current_value = "";
 let saved_value = "";
-let selected_operator = "";
 let opretor = "";
 /*
 1 -writing in current_value 
@@ -48,7 +45,7 @@ ifelse (oprator is clicked again oprate function on current-value and next_value
 //------------functions
 //math
 function add(savedValue, currentValue) {
-    return (+savedValue) + (+currentValue);
+    return ((+savedValue) + (+currentValue));
 }
 function subtract(savedValue, currentValue) {
     return savedValue - currentValue;
@@ -61,6 +58,7 @@ function divide(savedValue, currentValue) { //something is wrong with the divisi
 }
 
 function operate(opretor, savedValue, currentValue) {
+    if(saved_value="") return;
     if (opretor == "+") {
         return add(savedValue, currentValue);
     }
@@ -142,18 +140,18 @@ _dot.addEventListener("click", () => {
     updateNum(".");
 })
 
-function updateOpreator(oprator) {
-    opretor = oprator;
+function updateOpreator(selected_operator) {
     saved_value = current_value;
+    opretor = selected_operator;
     current_value = "";
     current.innerText = ""
     held.innerText = saved_value;
 }
 
-_addition.addEventListener("click", () => { updateOpreator("+") })
-_subtraction.addEventListener("click", () => { updateOpreator("-") })
-_multiplication.addEventListener("click", () => { updateOpreator("*") })
-_division.addEventListener("click", () => { opretor = updateOpreator = ("/") })
+_addition.addEventListener("click", () => { updateOpreator("+")})
+_subtraction.addEventListener("click", () => { updateOpreator("-")})
+_multiplication.addEventListener("click", () => { updateOpreator("*")})
+_division.addEventListener("click", () => { updateOpreator ("/") })
 _equals.addEventListener("click", () => {
     current_value = operate(opretor, saved_value, current_value)
     current.innerText = current_value;

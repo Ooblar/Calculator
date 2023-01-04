@@ -33,6 +33,7 @@ const _equals = document.getElementById("equals")
 let current_value = "";
 let saved_value = "";
 let opretor = "";
+let equalpressed = false;
 /*
 1 -writing in current_value 
 if an opretor is pressed 
@@ -58,7 +59,6 @@ function divide(savedValue, currentValue) { //something is wrong with the divisi
 }
 
 function operate(opretor, savedValue, currentValue) {
-    if(saved_value="") return;
     if (opretor == "+") {
         return add(savedValue, currentValue);
     }
@@ -88,9 +88,9 @@ _backspace.addEventListener("click", () => {//backspace button
 })
 
 function updateNum(num) {
+    
     current.innerText += num;
     current_value += num;
-    console.log(current_value)
 }
 
 _9.addEventListener("click", () => {
@@ -141,11 +141,18 @@ _dot.addEventListener("click", () => {
 })
 
 function updateOpreator(selected_operator) {
-    saved_value = current_value;
+    if(current_value !="" & saved_value!="" & equalpressed == false)
+    {
+        current_value = operate(opretor, saved_value, current_value)
+        current.innerText = current_value;
+    }
+    equalpressed=false;
     opretor = selected_operator;
+    saved_value = current_value;
     current_value = "";
     current.innerText = ""
     held.innerText = saved_value;
+    
 }
 
 _addition.addEventListener("click", () => { updateOpreator("+")})
@@ -153,7 +160,42 @@ _subtraction.addEventListener("click", () => { updateOpreator("-")})
 _multiplication.addEventListener("click", () => { updateOpreator("*")})
 _division.addEventListener("click", () => { updateOpreator ("/") })
 _equals.addEventListener("click", () => {
+    if(opretor=="") return
     current_value = operate(opretor, saved_value, current_value)
     current.innerText = current_value;
-    console.log(current.innerText)
+    saved_value = current_value;
+     equalpressed = true;
+
 })
+/*
+3 values 
+held 1
+held 2
+current value
+-------------------
+start on current value
+inbutnumber>current value
+on+ current value > held 1 
+current value =""
+inbut num > current value
+    path 1
+        on=
+        current value >held 2
+        return held 1 +held 2 in current value 
+        clear held 1 and held 2
+    path 2
+        on +
+        if held 1=""
+        held 1= current value; 
+on= return held 1 + current value;
+-----------
+
+1 add the numbers 
+held 5
+when the opration is pressed
+    if saved is empty
+        clear current value and but it in saved
+    if saved is not empty
+        do the opretion with current and saved
+2 display the value
+*/

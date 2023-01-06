@@ -6,7 +6,7 @@ const current = document.getElementById("current")
 //numbers side
 const numbers = document.querySelectorAll("numbers")
 const _clear = document.getElementById("clear")
-const _percentage = document.getElementById("percentage")//not implmnted yet
+const _nigative = document.getElementById("nigative")//not implmnted yet
 const _backspace = document.getElementById("backspace")
 const _7 = document.getElementById("7")
 const _8 = document.getElementById("8")
@@ -29,11 +29,13 @@ const _division = document.getElementById("division")
 const _equals = document.getElementById("equals")
 
 
-//values
+// defult values values
 let current_value = "";
 let saved_value = "";
 let opretor = "";
 let equalpressed = false;
+let dotpress = false;
+let nigativePress = false;
 /*
 1 -writing in current_value 
 if an opretor is pressed 
@@ -55,9 +57,15 @@ function multiply(savedValue, currentValue) {
     return savedValue * currentValue;
 }
 function divide(savedValue, currentValue) { //something is wrong with the division
+    if (currentValue == '0') { saved_value=0; return "Fuck you" }
+    sass()
     return savedValue / currentValue;
 }
-
+function sass()
+{
+    if(typeof(savedValue)===NaN||typeof(currentValue)===NaN ) 
+    return "still Fuck you";
+}
 function operate(opretor, savedValue, currentValue) {
     if (opretor == "+") {
         return add(savedValue, currentValue);
@@ -84,13 +92,22 @@ _clear.addEventListener("click", () => {//clear button
 _backspace.addEventListener("click", () => {//backspace button
     current.innerText = (current_value.slice(0, -1));
     current_value = (current_value.slice(0, -1));
-    console.log(current_value)
 })
 
 function updateNum(num) {
-    
+    nigativePress = false;
+
+    if(equalpressed==true)
+    {
+        held.innerText="";
+        current.innerText = num;
+        current_value = num;
+        saved_value="";
+        equalpressed=false;
+    }
+    else{
     current.innerText += num;
-    current_value += num;
+    current_value += num;}
 }
 
 _9.addEventListener("click", () => {
@@ -130,72 +147,70 @@ _1.addEventListener("click", () => {
 })
 _0.addEventListener("click", () => {
     updateNum("0");
-
 })
 _00.addEventListener("click", () => {
     updateNum("00");
 
 })
+_nigative.addEventListener("click", () => {
+
+
+
+    for (const num of current_value) {
+        if(num=="-")
+        {
+            nigativePress = true;
+        }
+
+    }
+
+    if (nigativePress == false) {
+        console.log(nigativePress)
+        current.innerText = "-" + current_value;
+        current_value = "-" + current_value;
+    }
+
+    else {
+        current_value = current_value.replace("-", "")
+        current.innerText = current_value.replace("-", "")
+        nigativePress = false;
+        console.log(nigativePress)
+
+    }
+})
 _dot.addEventListener("click", () => {
-    updateNum(".");
+    for (const num of current_value) {
+        if(num==".")
+        {
+            return
+        }
+    }
+    updateNum(".")
 })
 
 function updateOpreator(selected_operator) {
-    if(current_value !="" & saved_value!="" & equalpressed == false)
-    {
+    if (current_value != "" & saved_value != "" & equalpressed == false) {
         current_value = operate(opretor, saved_value, current_value)
         current.innerText = current_value;
     }
-    equalpressed=false;
+    equalpressed = false;
+    
     opretor = selected_operator;
     saved_value = current_value;
     current_value = "";
     current.innerText = ""
     held.innerText = saved_value;
-    
+
 }
 
-_addition.addEventListener("click", () => { updateOpreator("+")})
-_subtraction.addEventListener("click", () => { updateOpreator("-")})
-_multiplication.addEventListener("click", () => { updateOpreator("*")})
-_division.addEventListener("click", () => { updateOpreator ("/") })
+_addition.addEventListener("click", () => { updateOpreator("+") })
+_subtraction.addEventListener("click", () => { updateOpreator("-") })
+_multiplication.addEventListener("click", () => { updateOpreator("*") })
+_division.addEventListener("click", () => { updateOpreator("/") })
 _equals.addEventListener("click", () => {
-    if(opretor=="") return
+    if (opretor == "") return
     current_value = operate(opretor, saved_value, current_value)
     current.innerText = current_value;
-    saved_value = current_value;
-     equalpressed = true;
+    equalpressed = true;
 
 })
-/*
-3 values 
-held 1
-held 2
-current value
--------------------
-start on current value
-inbutnumber>current value
-on+ current value > held 1 
-current value =""
-inbut num > current value
-    path 1
-        on=
-        current value >held 2
-        return held 1 +held 2 in current value 
-        clear held 1 and held 2
-    path 2
-        on +
-        if held 1=""
-        held 1= current value; 
-on= return held 1 + current value;
------------
-
-1 add the numbers 
-held 5
-when the opration is pressed
-    if saved is empty
-        clear current value and but it in saved
-    if saved is not empty
-        do the opretion with current and saved
-2 display the value
-*/

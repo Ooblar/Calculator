@@ -48,18 +48,18 @@ ifelse (oprator is clicked again oprate function on current-value and next_value
 //------------functions
 //math
 function add(savedValue, currentValue) {
-    return ((+savedValue) + (+currentValue));
+    return ((+savedValue) + (+currentValue)).toFixed(5);
 }
 function subtract(savedValue, currentValue) {
-    return savedValue - currentValue;
+    return (savedValue - currentValue).toFixed(5) ;
 }
 function multiply(savedValue, currentValue) {
-    return savedValue * currentValue;
+    return (savedValue * currentValue).toFixed(5);
 }
 function divide(savedValue, currentValue) { //something is wrong with the division
     if (currentValue == '0') { saved_value=0; return "Fuck you" }
     sass()
-    return savedValue / currentValue;
+    return (savedValue / currentValue).toFixed(5);
 }
 function sass()
 {

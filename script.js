@@ -3,6 +3,7 @@
 //test
 const display = document.getElementById("display")
 const held = document.getElementById("held")
+const opreatorDisplay = document.getElementById("opreator")
 const current = document.getElementById("current")
 //numbers side
 const numbers = document.querySelectorAll("numbers")
@@ -48,19 +49,27 @@ ifelse (oprator is clicked again oprate function on current-value and next_value
 
 //------------functions
 //math
+
+/*
+If you want the usual behavior when rounding negative numbers, you would need to convert negative numbers to positive before calling Math.round(), and then convert them back to negative numbers before returning.
+*/
+function rounding(savedvalue,currentValue)
+{
+    return
+}
 function add(savedValue, currentValue) {
-    return ((+savedValue) + (+currentValue)).toFixed(5);
+    return Math.round(((+savedValue) + (+currentValue))*100000)/100000;
 }
 function subtract(savedValue, currentValue) {
-    return (savedValue - currentValue).toFixed(5) ;
+    return Math.round((savedValue - currentValue)*100000)/100000 ;
 }
 function multiply(savedValue, currentValue) {
-    return (savedValue * currentValue).toFixed(5);
+    return Math.round((savedValue * currentValue)*100000)/100000;
 }
 function divide(savedValue, currentValue) { //something is wrong with the division
     if (currentValue == '0') { saved_value=0; return "Fuck you" }
     sass()
-    return (savedValue / currentValue).toFixed(5);
+    return Math.round((savedValue / currentValue)*100000)/100000;
 }
 function sass()
 {
@@ -87,8 +96,8 @@ _clear.addEventListener("click", () => {//clear button
     current_value = "";
     saved_value = "";
     held.innerText = "";
-    opretor = "";
-    console.log(current_value)
+    opretor = "";  
+    opreatorDisplay.innerText="";
 })
 _backspace.addEventListener("click", () => {//backspace button
     current.innerText = (current_value.slice(0, -1));
@@ -166,7 +175,6 @@ _nigative.addEventListener("click", () => {
     }
 
     if (nigativePress == false) {
-        console.log(nigativePress)
         current.innerText = "-" + current_value;
         current_value = "-" + current_value;
     }
@@ -175,8 +183,6 @@ _nigative.addEventListener("click", () => {
         current_value = current_value.replace("-", "")
         current.innerText = current_value.replace("-", "")
         nigativePress = false;
-        console.log(nigativePress)
-
     }
 })
 _dot.addEventListener("click", () => {
@@ -192,15 +198,17 @@ _dot.addEventListener("click", () => {
 function updateOpreator(selected_operator) {
     if (current_value != "" & saved_value != "" & equalpressed == false) {
         current_value = operate(opretor, saved_value, current_value)
+        opreatorDisplay.innerText= opretor;
         current.innerText = current_value;
     }
-    equalpressed = false;
-    
+    equalpressed = false;  
     opretor = selected_operator;
     saved_value = current_value;
     current_value = "";
     current.innerText = ""
     held.innerText = saved_value;
+    opreatorDisplay.innerText= opretor;
+
 
 }
 
@@ -212,6 +220,21 @@ _equals.addEventListener("click", () => {
     if (opretor == "") return
     current_value = operate(opretor, saved_value, current_value)
     current.innerText = current_value;
+    held.innerText = saved_value
     equalpressed = true;
 
 })
+window.addEventListener("keydown",function(e)
+{
+    const number = document.querySelector(`button[data-key="${e.keyCode}"]`);
+    if(!number) return;
+    number.click()
+})
+window.addEventListener("keydown",function(e)
+{
+    const number2 = document.querySelector(`button[data-key2="${e.keyCode}"]`);
+    if(!number2) return;
+    number2.click()
+})
+const clicbutton = document.querySelectorAll('button')
+clicbutton.addEventListener("keydown",()=>{number})

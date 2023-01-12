@@ -6,6 +6,10 @@
     color: #FAFAFA;
     box-sizing: border-box;
 }
+/* @font-face {
+    font-family: ;
+    src: url();
+} */
 .color{
 color: #1D242B;
 color: #0077C0;
@@ -31,15 +35,20 @@ button
     border: solid;
     border:#1D242B ;
     border-width: 1px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    margin: 10px;
 }
 button:hover
 {
-    background-color: #FAFAFA;
-    color: #1D242B;
-}
-/* header{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 
-} */
+}
+button:active
+{
+    transform: translateY(4px);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
 #mainbody
 {
     border:solid;
@@ -52,6 +61,7 @@ button:hover
     width: 50vh;
     height: 80vh;
     padding: 5vh;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 #display
 {
@@ -64,21 +74,31 @@ button:hover
     flex:1 1 auto;
     word-break: break-word; 
     text-align: right;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    margin-bottom: 30px;
 }
 #current
 {
     font-size: 5vh;
     padding-top: 10px;
-    padding-right: 20px;
-
+    padding-right: 35px;
 }
-#held
+#topside
 {
-    font-size:3.5vh;    
+    display: flex;
+    justify-content: flex-end;
+    
     padding-top: 10px;
     padding-right: 20px;
+    align-content: center;
 }
-
+#held{
+    font-size: 3.5vh;
+}
+#opreator{
+    color: #0077C0;
+    font-size: 3.0vh;
+}
 #buttons
 {
     display: grid;   
@@ -99,6 +119,12 @@ button:hover
     grid-template-columns: auto  ;
     grid-template-rows: auto auto auto;
     align-items: stretch;
+    
+}
+.nonnumber
+{
+    font-weight: bold;
+    color: #0077C0;
 }
 #fotter
 {
@@ -106,4 +132,12 @@ button:hover
     display: flex;
     width: 100%;
     justify-content: center;
+    padding: 10px;
+}
+@media only screen and (max-width: 600px) {
+    #mainbody {
+        width: 40vh;
+        height: 70vh;
+        padding: 5vh;
+    }
 }

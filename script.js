@@ -2,7 +2,6 @@
 //display
 //test
 const display = document.getElementById("display")
-const held = document.getElementById("held")
 const opreatorDisplay = document.getElementById("opreator")
 const current = document.getElementById("current")
 //numbers side
@@ -95,7 +94,6 @@ _clear.addEventListener("click", () => {//clear button
     current.innerText = "";
     current_value = "";
     saved_value = "";
-    held.innerText = "";
     opretor = "";  
     opreatorDisplay.innerText="";
 })
@@ -109,7 +107,6 @@ function updateNum(num) {
 
     if(equalpressed==true)
     {
-        held.innerText="";
         current.innerText = num;
         current_value = num;
         saved_value="";
@@ -206,7 +203,6 @@ function updateOpreator(selected_operator) {
     saved_value = current_value;
     current_value = "";
     current.innerText = ""
-    held.innerText = saved_value;
     opreatorDisplay.innerText= opretor;
 
 
@@ -220,7 +216,6 @@ _equals.addEventListener("click", () => {
     if (opretor == "") return
     current_value = operate(opretor, saved_value, current_value)
     current.innerText = current_value;
-    held.innerText = saved_value
     equalpressed = true;
 
 })

@@ -1,13 +1,12 @@
 // nodes
-//display
-//test
+
 const display = document.getElementById("display")
 const opreatorDisplay = document.getElementById("opreator")
 const current = document.getElementById("current")
 //numbers side
 const numbers = document.querySelectorAll("numbers")
 const _clear = document.getElementById("clear")
-const _nigative = document.getElementById("nigative")//not implmnted yet
+const _nigative = document.getElementById("nigative")
 const _backspace = document.getElementById("backspace")
 const _7 = document.getElementById("7")
 const _8 = document.getElementById("8")
@@ -37,44 +36,22 @@ let opretor = "";
 let equalpressed = false;
 let dotpress = false;
 let nigativePress = false;
-/*
-1 -writing in current_value 
-if an opretor is pressed 
-chang into next value
-if(= is clicked){use opratefucntion on current_value and next_value;
- next value is now current value}
-ifelse (oprator is clicked again oprate function on current-value and next_value)
-*/
 
 //------------functions
-//math
-
-/*
-If you want the usual behavior when rounding negative numbers, you would need to convert negative numbers to positive before calling Math.round(), and then convert them back to negative numbers before returning.
-*/
-function rounding(savedvalue,currentValue)
-{
-    return
-}
 function add(savedValue, currentValue) {
-    return Math.round(((+savedValue) + (+currentValue))*100000)/100000;
+    return Math.round(((+savedValue) + (+currentValue)) * 100000) / 100000;
 }
 function subtract(savedValue, currentValue) {
-    return Math.round((savedValue - currentValue)*100000)/100000 ;
+    return Math.round((savedValue - currentValue) * 100000) / 100000;
 }
 function multiply(savedValue, currentValue) {
-    return Math.round((savedValue * currentValue)*100000)/100000;
+    return Math.round((savedValue * currentValue) * 100000) / 100000;
 }
 function divide(savedValue, currentValue) { //something is wrong with the division
-    if (currentValue == '0') { saved_value=0; return "Fuck you" }
-    sass()
-    return Math.round((savedValue / currentValue)*100000)/100000;
+    if (currentValue == '0') { saved_value = 0; return "Fuck you" }
+    return Math.round((savedValue / currentValue) * 100000) / 100000;
 }
-function sass()
-{
-    if(typeof(savedValue)===NaN||typeof(currentValue)===NaN ) 
-    return "still Fuck you";
-}
+
 function operate(opretor, savedValue, currentValue) {
     if (opretor == "+") {
         return add(savedValue, currentValue);
@@ -82,39 +59,40 @@ function operate(opretor, savedValue, currentValue) {
     if (opretor == "-") {
         return subtract(savedValue, currentValue);
     }
-    if (opretor == "*") {
+    if (opretor == "×") {
         return multiply(savedValue, currentValue);
     }
-    if (opretor == "/") {
+    if (opretor == "÷") {
         return divide(savedValue, currentValue);
     }
 }
-
-_clear.addEventListener("click", () => {//clear button
-    current.innerText = "";
-    current_value = "";
-    saved_value = "";
-    opretor = "";  
-    opreatorDisplay.innerText="";
-})
-_backspace.addEventListener("click", () => {//backspace button
-    current.innerText = (current_value.slice(0, -1));
-    current_value = (current_value.slice(0, -1));
-})
-
 function updateNum(num) {
     nigativePress = false;
 
-    if(equalpressed==true)
-    {
+    if (equalpressed == true) {
         current.innerText = num;
         current_value = num;
-        saved_value="";
-        equalpressed=false;
+        saved_value = "";
+        equalpressed = false;
     }
-    else{
-    current.innerText += num;
-    current_value += num;}
+    else {
+        current.innerText += num;
+        current_value += num;
+    }
+}
+function updateOpreator(selected_operator) {
+    //oprate on the current and saved value in the moment on the opreation selection
+    if (current_value != "" & saved_value != "" & equalpressed == false) {
+        current_value = operate(opretor, saved_value, current_value)
+        opreatorDisplay.innerText = opretor;
+        current.innerText = current_value;
+    }
+    equalpressed = false;
+    opretor = selected_operator;
+    saved_value = current_value;
+    current_value = "";
+    current.innerText = ""
+    opreatorDisplay.innerText = opretor;
 }
 
 _9.addEventListener("click", () => {
@@ -157,25 +135,28 @@ _0.addEventListener("click", () => {
 })
 _00.addEventListener("click", () => {
     updateNum("00");
-
 })
-_nigative.addEventListener("click", () => {
-
-
-
+_clear.addEventListener("click", () => {
+    current.innerText = "";
+    current_value = "";
+    saved_value = "";
+    opretor = "";
+    opreatorDisplay.innerText = "";
+})
+_backspace.addEventListener("click", () => {
+    current.innerText = (current_value.slice(0, -1));
+    current_value = (current_value.slice(0, -1));
+})
+_nigative.addEventListener("click", () => {//this event will look for a "-"in the number and if it have one i will remove it and it it dosnt it will add it
     for (const num of current_value) {
-        if(num=="-")
-        {
+        if (num == "-") {
             nigativePress = true;
         }
-
     }
-
     if (nigativePress == false) {
         current.innerText = "-" + current_value;
         current_value = "-" + current_value;
     }
-
     else {
         current_value = current_value.replace("-", "")
         current.innerText = current_value.replace("-", "")
@@ -184,52 +165,31 @@ _nigative.addEventListener("click", () => {
 })
 _dot.addEventListener("click", () => {
     for (const num of current_value) {
-        if(num==".")
-        {
+        if (num == ".") {
             return
         }
     }
     updateNum(".")
 })
 
-function updateOpreator(selected_operator) {
-    if (current_value != "" & saved_value != "" & equalpressed == false) {
-        current_value = operate(opretor, saved_value, current_value)
-        opreatorDisplay.innerText= opretor;
-        current.innerText = current_value;
-    }
-    equalpressed = false;  
-    opretor = selected_operator;
-    saved_value = current_value;
-    current_value = "";
-    current.innerText = ""
-    opreatorDisplay.innerText= opretor;
-
-
-}
-
 _addition.addEventListener("click", () => { updateOpreator("+") })
 _subtraction.addEventListener("click", () => { updateOpreator("-") })
-_multiplication.addEventListener("click", () => { updateOpreator("*") })
-_division.addEventListener("click", () => { updateOpreator("/") })
+_multiplication.addEventListener("click", () => { updateOpreator("×") })
+_division.addEventListener("click", () => { updateOpreator("÷") })
 _equals.addEventListener("click", () => {
     if (opretor == "") return
     current_value = operate(opretor, saved_value, current_value)
     current.innerText = current_value;
     equalpressed = true;
-
 })
-window.addEventListener("keydown",function(e)
-{
+window.addEventListener("keydown", function (e) {
     e.preventDefault();
     const number = document.querySelector(`button[data-key="${e.keyCode}"]`);
-    if(!number) return;
-    
+    if (!number) return;
     number.click()
 })
-window.addEventListener("keydown",function(e)
-{
+window.addEventListener("keydown", function (e) {
     const number2 = document.querySelector(`button[data-key2="${e.keyCode}"]`);
-    if(!number2) return;
+    if (!number2) return;
     number2.click()
 })

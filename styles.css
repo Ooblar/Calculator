@@ -6,10 +6,8 @@
     color: #FAFAFA;
     box-sizing: border-box;
 }
-/* @font-face {
-    font-family: ;
-    src: url();
-} */
+@font-face { font-family: digtal; src: url('./fonts/digital-7.ttf'); } 
+
 .color{
 color: #1D242B;
 color: #0077C0;
@@ -76,6 +74,8 @@ button:active
     text-align: right;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
     margin-bottom: 30px;
+    font-family: "digtal";
+    padding-top: 20px;
 }
 #current
 {

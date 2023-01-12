@@ -226,8 +226,10 @@ _equals.addEventListener("click", () => {
 })
 window.addEventListener("keydown",function(e)
 {
+    e.preventDefault();
     const number = document.querySelector(`button[data-key="${e.keyCode}"]`);
     if(!number) return;
+    
     number.click()
 })
 window.addEventListener("keydown",function(e)
@@ -236,5 +238,3 @@ window.addEventListener("keydown",function(e)
     if(!number2) return;
     number2.click()
 })
-const clicbutton = document.querySelectorAll('button')
-clicbutton.addEventListener("keydown",()=>{number})

@@ -48,7 +48,7 @@ function multiply(savedValue, currentValue) {
     return Math.round((savedValue * currentValue) * 100000) / 100000;
 }
 function divide(savedValue, currentValue) { //something is wrong with the division
-    if (currentValue == '0') { saved_value = 0; return "Fuck you" }
+    if (currentValue == '0') { saved_value = 0; return "you can't divide by 0 lol" }
     return Math.round((savedValue / currentValue) * 100000) / 100000;
 }
 

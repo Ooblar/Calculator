@@ -66,6 +66,7 @@ function operate(opretor, savedValue, currentValue) {
         return divide(savedValue, currentValue);
     }
 }
+
 function updateNum(num) {
     nigativePress = false;
 
@@ -147,6 +148,7 @@ _backspace.addEventListener("click", () => {
     current.innerText = (current_value.slice(0, -1));
     current_value = (current_value.slice(0, -1));
 })
+
 _nigative.addEventListener("click", () => {//this event will look for a "-"in the number and if it have one i will remove it and it it dosnt it will add it
     for (const num of current_value) {
         if (num == "-") {
@@ -184,12 +186,14 @@ _equals.addEventListener("click", () => {
 })
 window.addEventListener("keydown", function (e) {
     e.preventDefault();
-    const number = document.querySelector(`button[data-key="${e.keyCode}"]`);
+    const number = document.querySelector(`button[data-key="${e.code}"]`);//needs to be changed 
     if (!number) return;
     number.click()
 })
 window.addEventListener("keydown", function (e) {
-    const number2 = document.querySelector(`button[data-key2="${e.keyCode}"]`);
+    e.preventDefault();
+
+    const number2 = document.querySelector(`button[data-key2="${e.code}"]`);
     if (!number2) return;
     number2.click()
 })

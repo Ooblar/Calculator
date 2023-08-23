@@ -47,7 +47,7 @@ function subtract(savedValue, currentValue) {
 function multiply(savedValue, currentValue) {
     return Math.round((savedValue * currentValue) * 100000) / 100000;
 }
-function divide(savedValue, currentValue) { 
+function divide(savedValue, currentValue) {
     if (currentValue == '0') { return "ILLEGAL ACTION" }
     return Math.round((savedValue / currentValue) * 100000) / 100000;
 }
@@ -65,15 +65,14 @@ function operate(opretor, savedValue, currentValue) {
     if (opretor == "÷") {
         return divide(savedValue, currentValue);
     }
-
 }
-//
+
 function updateNum(num) {
 
     //when i make an opration on a num and i want to make another opration on it it would concat the new number on the old number and the shown value in the display is not the real value 
-    if(saved_value!=""&&current_value=="")//so this is used to  empty the display
+    if (saved_value != "" && current_value == "")//so this is used to  empty the display
     {
-        current.innerText="";
+        current.innerText = "";
     }
 
     // if (isNaN(current_value) || isNaN(saved_value)) return;
@@ -81,7 +80,6 @@ function updateNum(num) {
     current.innerText += num;
     current_value += num;
 }
-
 function updateOpreator(selected_operator) {
     if (isNaN(current_value) || isNaN(saved_value)) return;
     // // oprate on the current and saved value in the moment on the opreation selection
@@ -90,7 +88,7 @@ function updateOpreator(selected_operator) {
         opretor = selected_operator;//change the oprator again after you do the previews opration if i repressed any opration 
         opreatorDisplay.innerText = opretor;//change the show opretor
         current_value = "";//resetting so it wouldnot add to the current number in the background
-        current.innerText=saved_value;
+        current.innerText = saved_value;
     }
     else {
         // current.innerText = saved_value;
@@ -102,9 +100,7 @@ function updateOpreator(selected_operator) {
         current.innerText = ""
     }
 }
-
 //
-
 _9.addEventListener("click", () => {
     updateNum("9");
 })
@@ -114,7 +110,6 @@ _8.addEventListener("click", () => {
 })
 _7.addEventListener("click", () => {
     updateNum("7");
-
 })
 _6.addEventListener("click", () => {
     updateNum("6");
@@ -192,7 +187,7 @@ _multiplication.addEventListener("click", () => { updateOpreator("x") })
 _division.addEventListener("click", () => { updateOpreator("÷") })
 
 _equals.addEventListener("click", () => {
-    if (opretor == "" || saved_value == "") return;
+    if (opretor === "" || saved_value === "") return;
     current_value = operate(opretor, saved_value, current_value)
     current.innerText = current_value;
     saved_value = "";
@@ -208,7 +203,6 @@ window.addEventListener("keydown", function (e) {
 })
 window.addEventListener("keydown", function (e) {
     e.preventDefault();
-
     const number2 = document.querySelector(`button[data-key2="${e.code}"]`);
     if (!number2) return;
     number2.click()
